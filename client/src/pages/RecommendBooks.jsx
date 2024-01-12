@@ -18,15 +18,17 @@ const RecommendBooks = () => {
 	if (error) return <p>Error :(</p>
 
 	return (
-		<div>
+		<div className="kitap-oner">
 			<h1>Önerilen Kitap</h1>
 			{recommendedBook && (
-				<div>
-					<p>Kitap Adı: {recommendedBook.title}</p>
-					<p>Yazar: {recommendedBook.author}</p>
-					<p>Yayın Yılı: {recommendedBook.publicationYear}</p>
-					<p>Tür: {recommendedBook.genre}</p>
-				</div>
+				<ul>
+					<li>
+						<p>Kitap Adı: {recommendedBook.title}</p>
+						<p>Yazar: {recommendedBook.author}</p>
+						<p>Yayın Yılı: {recommendedBook.publicationYear}</p>
+						<p>Tür: {recommendedBook.genre}</p>
+					</li>
+				</ul>
 			)}
 		</div>
 	)

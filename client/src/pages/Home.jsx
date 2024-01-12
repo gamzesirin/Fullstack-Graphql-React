@@ -47,65 +47,83 @@ const Home = () => {
 		<>
 			{loading && <p>Loading...</p>}
 			{error && <p>Error :(</p>}
+			<div className="menu">
+				<h1 style={{ fontSize: '2rem' }}>Kitaplığım</h1>
+				<div className="menu1-input1">
+					<input type="text" placeholder="Başlık veya yazar ara" onChange={handleSearchChange} />
+					<button onClick={handleSearch}>Ara</button>
+				</div>
 
-			<h1>Anasayfa</h1>
-
-			<input type="text" placeholder="Başlık veya yazar ara" onChange={handleSearchChange} />
-			<button onClick={handleSearch}>Ara</button>
-
-			<div>
-				<input type="text" placeholder="Tür Ara" onChange={(e) => setGenreFilter(e.target.value.toLowerCase())} />
-				<input type="number" placeholder="Yayın Yılı Ara" onChange={(e) => setYearFilter(e.target.value)} />
-				<button onClick={handleFilter}>Filtrele</button>
+				<button onClick={handleLogout} className="logout">
+					Çıkış Yap
+				</button>
 			</div>
-
-			<h2>Kitaplar</h2>
-			<p>Kitap sayısı: {data && data.books.length}</p>
-			<button>
-				<Link to="/book/add">Kitap Ekle</Link>
-			</button>
-			<button>
-				<Link to="/recommend-books">Kitap Öner</Link>
-			</button>
-			<button onClick={handleLogout}>Çıkış Yap</button>
-
-			<p>Bulunan Kitaplar:</p>
-			<ul>
-				{filteredBooks.map((book) => (
-					<li key={book.id} style={{ marginBottom: '20px' }}>
-						<Link to={`/book/${book.id}`}>
-							<span>Kitap adı: {book.title}</span>
-							<span>Yazar: {book.author}</span>
-							<span>Yayın yılı: {book.publicationYear}</span>
-							<span>Tür: {book.genre}</span>
-						</Link>
-					</li>
-				))}
-			</ul>
-
-			<p>Tüm Kitaplar:</p>
-			{data && (
-				<ul>
-					{data.books.map((book) => (
-						<li key={book.id} style={{ marginBottom: '20px' }}>
-							<Link
-								to={`/book/${book.id}`}
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									alignItems: 'start',
-									justifyContent: 'start'
-								}}
-							>
-								<span>Kitap adı: {book.title}</span>
-								<span>Yazar: {book.author}</span>
-								<span>Yayın yılı: {book.publicationYear}</span>
-								<span>Tür: {book.genre}</span>
-							</Link>
-						</li>
-					))}
-				</ul>
-			)}
+			<div className="container-main">
+				<div className="container-left">
+					<div className="menu-input">
+						<input type="text" placeholder="Tür Ara" onChange={(e) => setGenreFilter(e.target.value.toLowerCase())} />
+						<input
+							type="number"
+							placeholder="Yayın Yılı Ara"
+							onChange={(e) => setYearFilter(e.target.value)}
+							className="inpt"
+						/>
+						<button onClick={handleFilter}>Filtrele</button>
+					</div>
+					<div className="left-div">
+						<h2 style={{ fontSize: '2rem' }}>Bulunan Kitaplar:</h2>
+						<ul>
+							{filteredBooks.map((book) => (
+								<li key={book.id}>
+									<Link to={`/book/${book.id}`}>
+										<span>Kitap adı: {book.title}</span>
+										<span>Yazar: {book.author}</span>
+										<span>Yayın yılı: {book.publicationYear}</span>
+										<span>Tür: {book.genre}</span>
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
+				<div className="container-right">
+					<div className="container1">
+						<h2 style={{ fontSize: '1.8rem' }}>Kitaplar</h2>
+						<p>Kitap sayısı: {data && data.books.length}</p>
+						<button>
+							<Link to="/book/add">Kitap Ekle</Link>
+						</button>
+						<button>
+							<Link to="/recommend-books">Kitap Öner</Link>
+						</button>
+					</div>
+					<div className="container2">
+						<h2 style={{ fontSize: '2rem' }}>Tüm Kitaplar:</h2>
+						{data && (
+							<ul>
+								{data.books.map((book) => (
+									<li key={book.id}>
+										<Link
+											to={`/book/${book.id}`}
+											style={{
+												display: 'flex',
+												flexDirection: 'column',
+												alignItems: 'start',
+												justifyContent: 'start'
+											}}
+										>
+											<span>Kitap adı: {book.title}</span>
+											<span>Yazar: {book.author}</span>
+											<span>Yayın yılı: {book.publicationYear}</span>
+											<span>Tür: {book.genre}</span>
+										</Link>
+									</li>
+								))}
+							</ul>
+						)}
+					</div>
+				</div>
+			</div>
 		</>
 	)
 }
